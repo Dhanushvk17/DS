@@ -1,0 +1,209 @@
+Tree traversals
+python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class Tree:
+    def __init__(self):
+        self.root = None
+
+    def insert(self, data):
+        n = Node(data)
+        if self.root is None:
+            self.root = n
+        else:
+            t = self.root
+            while True:
+                if data < t.data:
+                    if t.left is None:
+                        t.left = n
+                        break
+                    else:
+                        t = t.left
+                else:
+                    if t.right is None:
+                        t.right = n
+                        break
+                    else:
+                        t = t.right
+
+    def preorder(self, node):
+        if node is None:
+            return
+        else:
+            print(node.data, end=" ")
+            self.preorder(node.left)
+            self.preorder(node.right)
+
+    def inorder(self, node):
+        if node is None:
+            return
+        else:
+            self.inorder(node.left)
+            print(node.data, end=" ")
+            self.inorder(node.right)
+
+    def postorder(self, node):
+        if node is None:
+            return
+        else:
+            self.postorder(node.left)
+            self.postorder(node.right)
+            print(node.data, end=" ")
+
+if __name__ == "__main__":
+    t = Tree()
+    while(True):
+        n=int(input())
+        if(n<0):
+            break
+        t.insert(n)
+    i = t.root
+    t.preorder(i)
+    print()
+    t.inorder(i)
+    print()
+    t.postorder(i)
+--------------------------------------------------------------------------------------------------------------------
+class Node:
+    def __init__(self, data):
+        self.left = None
+        self.right = None
+        self.data = data
+
+    def insert(self, data):
+        if self.data:
+            if data < self.data:
+                if self.left is None:
+                    self.left = Node(data)
+                else:
+                    self.left.insert(data)
+            elif data > self.data:
+                if self.right is None:
+                    self.right = Node(data)
+                else:
+                    self.right.insert(data)
+        else:
+            self.data = data
+
+    def PrintTree(self):
+        if self.left:
+            self.left.PrintTree()
+        print(self.data, end=' ')
+        if self.right:
+            self.right.PrintTree()
+
+    def inorderTraversal(self, root):
+        res = []
+        if root:
+            res = self.inorderTraversal(root.left)
+            res.append(root.data)
+            res = res + self.inorderTraversal(root.right)
+        return res
+
+root = Node(int(input("Enter the root value")))
+
+while True:
+    data = int(input("enter the element or give -1 to stop "))
+    if data<0:
+        break
+    root.insert(int(data))
+
+root.PrintTree()
+print(root.inorderTraversal(root))
+
+=========================================================================================================================
+java
+
+public class tree {
+    static class node {
+        int data;
+        node left;
+        node right;
+
+        public node(int data) {
+            this.data = data;
+            this.left = null;
+            this.right = null;
+        }
+    }
+
+    node root;
+
+    public static void ins(pre l, int data) {
+        node n = new node(data);
+        if (l.root == null)
+            l.root = n;
+        else {
+            node t = l.root;
+            while (true) {
+                if (data < t.data) {
+                    if (t.left == null) {
+                        t.left = n;
+                        break;
+                    } else
+                        t = t.left;
+                } else {
+                    if (t.right == null) {
+                        t.right = n;
+                        break;
+                    } else
+                        t = t.right;
+                }
+            }
+        }
+    }
+
+    public static void preOr(node l) {
+        if (l == null)
+            return;
+        else {
+
+            System.out.print(l.data + " ");
+            preOr(l.left);
+            preOr(l.right);
+        }
+    }
+
+    public static void inOr(node l) {
+        if (l == null)
+            return;
+        else {
+            inOr(l.left);
+            System.out.print(l.data + " ");
+
+            inOr(l.right);
+        }
+    }
+
+    public static void posOr(node l) {
+        if (l == null)
+            return;
+        else {
+            posOr(l.left);
+            posOr(l.right);
+            System.out.print(l.data + " ");
+
+        }
+    }
+
+    public static void main(String args[]) {
+        pre l = new pre();
+        ins(l, 4);
+        ins(l, 2);
+        ins(l, 3);
+        ins(l, 1);
+        ins(l, 6);
+        ins(l, 5);
+        ins(l, 7);
+        node n = l.root;
+        preOr(n);
+        System.out.println();
+        inOr(n);
+        System.out.println();
+        posOr(n);
+    }
+}

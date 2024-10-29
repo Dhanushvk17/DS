@@ -1,0 +1,87 @@
+import java.util.*;
+class Main
+{
+  node head,temp;
+  class node
+  {
+    int data;
+    node next;
+    node(int n)
+    {
+      data=n;
+    }
+  }
+     void ins(int data)
+    {
+      node nn=new node(data);
+      if(head==null)
+      {
+        head=nn;
+        temp=nn;
+      }
+      else
+      {
+        temp.next=nn;
+        temp=nn;
+        }
+      }
+  void max()
+    {
+    temp=head;
+    int max=0;
+    while(temp!=null)
+    {
+      if(max<=temp.data)
+        max=temp.data;
+      temp=temp.next;
+    }
+    System.out.println(max);
+  }
+    
+  public static void main(String args[])
+  {
+   Scanner z=new Scanner(System.in);
+    Main o = new Main();
+    while(true)
+    {
+      int n=z.nextInt();
+      if(n<0)
+        break;
+      o.ins(n);
+    }
+       o.max();
+}
+}
+==============================================================================================================================
+class node:
+  def __init__(self,data):
+    self.data=data
+    self.next=None
+class ll:
+  def __init__(self):
+    self.head=None
+    self.temp=None
+  def append(self,data):
+    newnode=node(data)
+    if self.head is None:
+      self.head=newnode
+      self.temp=newnode
+    else:
+      self.temp.next=newnode
+      self.temp=newnode
+  def max(self):
+    self.temp=self.head
+    maxi=0
+    while self.temp:
+      if maxi<self.temp.data:
+        maxi=self.temp.data
+      self.temp=self.temp.next
+    print(maxi)
+if __name__=='__main__':
+  l=ll()
+  while True:
+    i=int(input())
+    if(i<0):
+      break
+    l.append(i)
+  l.max()

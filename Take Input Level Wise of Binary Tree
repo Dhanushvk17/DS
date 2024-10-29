@@ -1,0 +1,151 @@
+Take Input Level Wise of Binary Tree and then print in the inorder format
+
+Input Format
+
+No
+
+Constraints
+
+No
+
+Output Format
+
+Inorder traversal of Binary tree
+
+Sample Input 0
+
+8 3 10 1 6 -1 14 -1 -1 4 7 13 -1 -1 -1 -1 -1 -1 -1
+Sample Output 0
+
+1 3 4 6 7 8 10 13 14
+Sample Input 1
+
+1 2 3 4 5 6 7 -1 -1 -1 -1 -1 -1 -1 -1
+Sample Output 1
+
+4 2 5 1 6 3 7
+
+------------------------------------------------------------------------
+PYTHON
+from queue import Queue
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+
+def takeInput(li):
+    q = Queue()
+    i = 0
+    if len(li) == 1:
+        return None
+
+    data = li[i]
+    i += 1
+
+
+    root = Node(data)
+    q.put(root)
+
+    while not q.empty():
+        frontNode = q.get()
+
+        data = li[i]
+        i += 1
+
+        if data != -1:
+            nn = Node(data)
+            frontNode.left = nn
+            q.put(nn)
+
+        data = li[i]
+        i += 1
+
+        if data != -1:
+            nn = Node(data)
+            frontNode.right = nn
+            q.put(nn)
+
+    return root
+
+def inorder(root):
+    if root is None:
+        return
+    inorder(root.left)
+    print(root.data, end=" ")
+    inorder(root.right)
+
+
+if __name__ == "__main__":
+    input = input().split()
+    li = [int(x) for x in input]
+    root = takeInput(li)
+    inorder(root)
+=============================================================================================================
+
+JAVA
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+    static class node
+    {
+        int data;
+        node left;
+        node right;
+        node(int data)
+        {
+            this.data=data;
+            left=null;
+            right=null;
+            
+        }
+    }
+    
+    static void dis(node head)
+    {
+        if(head==null)
+            return ;
+        dis(head.left);
+        System.out.print(head.data+" ");
+        dis(head.right);     
+    }
+    
+    
+
+    public static void main(String[] args) {
+        Queue<node> q=new LinkedList<>();
+        Scanner z=new Scanner(System.in);
+        
+        String[] s=z.nextLine().split(" ");
+        int i=0,data;
+        node root,head;
+        
+        data=Integer.parseInt(s[i++]);
+        node nn=new node(data);
+        head=nn;
+        q.add(nn);
+        while(!q.isEmpty())
+        {
+            root=q.poll();
+            data=Integer.parseInt(s[i++]);
+            if(data!=-1)
+            {
+                root.left=new node(data);
+                q.add(root.left);
+            }
+            data=Integer.parseInt(s[i++]);
+            if(data!=-1)
+            {
+                root.right=new node(data);
+                q.add(root.right);
+            }
+        }
+        dis(head);      
+    }
+}

@@ -1,0 +1,207 @@
+For a given a string expression containing only round brackets or parentheses, check if they are balanced or not. Brackets are said to be balanced if the bracket which opens last, closes first.
+
+Input Format
+
+Expression: (()())
+Since all the opening brackets have their corresponding closing brackets, we say it is balanced and hence the output will be, 'true'.
+You need to return a boolean value indicating whether the expression is balanced or not.
+Note:
+The input expression will not contain spaces in between.
+Constraints
+
+1 <= N <= 10^7
+Where N is the length of the expression.
+Time Limit: 1sec
+Output Format
+
+The only line of output prints 'true' or 'false'.
+Sample Input 0
+
+(()()())
+Sample Output 0
+
+true
+Sample Input 1
+
+()()(()
+Sample Output 1
+
+false
+===========================================================================================================
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+    public static void main(String[] args) {
+        Solution o=new Solution();
+        Scanner z=new Scanner(System.in);
+        String data=z.next();
+        int n=data.length();
+        char a[]=new char[n];
+        int top=-1;
+        for(int i=0;i<n;i++)
+        {
+            char ch=data.charAt(i);//check
+            if(ch=='{'||ch=='('||ch=='[')
+                a[++top]=ch;
+            else
+            {
+                if(top==-1)
+                {
+                    System.out.println("false");
+                    return ;
+                }   
+                char cpop=a[top];
+                if(ch==')'&&cpop=='('||ch==']'&&cpop=='['||ch=='}'&&cpop=='{')
+                    top--;
+                else
+                    System.out.println("false");
+            } 
+        }
+        if(top==-1)
+            System.out.print("true");
+        else
+            System.out.print("false");
+    }    
+}
+======================================================================================================
+python
+class Node:
+    def __init__(self):
+        self.data = None
+        self.next = None
+class ll:
+    top = None
+
+    @staticmethod
+    def push(num):
+        new_node = Node()
+        new_node.data = num
+        if ll.top is None:
+            ll.top = new_node
+            return
+        new_node.next = ll.top
+        ll.top = new_node
+
+    @staticmethod
+    def pop():
+        temp = ll.top
+        return_char = temp.data
+        # print("Popped: " + temp.data)
+        ll.top = ll.top.next
+        return return_char
+    def is_empty():
+        if ll.top is None:
+            return True
+        return False
+    def is_balanced(expr):
+        for i in range(len(expr)):
+            x = expr[i]
+            if x == '(' or x == '[' or x == '{':
+                ll.push(x)
+                continue
+            if ll.is_empty():
+                return False
+            check = None
+            if x == ')':
+                check = ll.pop()
+                if check == '{' or check == '[':
+                    return False
+            elif x == '}':
+                check = ll.pop()
+                if check == '(' or check == '[':
+                    return False
+            elif x == ']':
+                check = ll.pop()
+                if check == '(' or check == '{':
+                    return False
+        return ll.is_empty()
+
+
+if __name__ == '__main__':
+    expr = input()
+    if ll.is_balanced(expr):
+        print("Balanced")
+    else:
+        print("Not Balanced")
+==============================================================================================================================================
+
+import java.util.*;
+
+class Node {
+    char data;
+    Node next = null;
+}
+
+public class BalancedExpression {
+
+    static Node top;
+
+    static void push(char num) {
+        Node newNode = new Node();
+        newNode.data = num;
+        if (top == null) {
+            top = newNode;
+            return;
+        }
+        newNode.next = top;
+        top = newNode;
+    }
+
+    static char pop() {
+        Node temp = top;
+        char returnChar = temp.data;
+        // System.out.println("Popped: " + temp.data);
+        top = top.next;
+        return returnChar;
+    }
+
+    static boolean isEmpty() {
+        if (top == null) {
+            return true;
+        }
+        return false;
+    }
+
+    static boolean isBalanced(String expr) {
+        for (int i = 0; i < expr.length(); i++) {
+            char x = expr.charAt(i);
+            if (x == '(' || x == '[' || x == '{') {
+                push(x);
+                continue;
+            }
+            if (isEmpty()) {
+                return false;
+            }
+            char check;
+            switch (x) {
+                case ')':
+                    check = pop();
+                    if (check == '{' || check == '[')
+                        return false;
+                    break;
+                case '}':
+                    check = pop();
+                    if (check == '(' || check == '[')
+                        return false;
+                    break;
+                case ']':
+                    check = pop();
+                    if (check == '(' || check == '{')
+                        return false;
+                    break;
+            }
+        }
+        return (isEmpty());
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String expr = sc.nextLine();
+        if (isBalanced(expr))
+            System.out.println("Balanced ");
+        else
+            System.out.println("Not Balanced ");
+        sc.close();
+    }
+}

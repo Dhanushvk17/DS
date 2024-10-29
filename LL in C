@@ -1,0 +1,128 @@
+// Online C compiler to run C program online
+#include <stdio.h>
+#include<stdlib.h>
+int main() {
+    struct node
+    {
+        int data;
+        struct node *next;
+    };
+    struct node *head,*temp,*newnode;
+    head=0;
+    int ch=1;
+    while(ch)
+    {
+        newnode=(struct node *)malloc(sizeof(struct node));
+       scanf("%d",&newnode->data);
+        newnode->next=0;
+        if(head==0)
+            temp=head=newnode;
+        else{
+            temp->next=newnode;
+            temp=temp->next;
+        }
+        printf("enter ur choice");
+        scanf("%d",&ch);
+    }
+    temp=head;
+    for(;temp!=0;)
+    {
+        printf("%d",temp->data);
+        temp=temp->next;
+    }
+}
+-------------------------------------------------------------------------------------------------------
+#include<stdio.h>
+#include<stdlib.h>
+struct Node{
+    int data;
+    struct Node *next;
+};
+struct Node *head,*tail,*newNode;
+ 
+ struct Node createNode(int a){
+    newNode=(struct Node*)malloc(sizeof (struct Node));
+    newNode->data=a;
+    newNode-> next=NULL;
+
+ }
+ 
+ void insert (int a) {
+    createNode(a);
+    if (head == NULL){
+    head=newNode;
+    tail=newNode;
+    }
+    else{
+    tail->next=newNode;
+    tail=newNode;
+    }
+ }
+  void print(struct Node *h){
+    while(h!=NULL){
+    printf("%d", h->data);
+    h=h->next;
+    }
+}
+
+int main(){
+    while(1){
+    int a;
+    scanf("%d", &a);
+    if(a>0)
+    insert(a);
+    else
+        break;
+}
+    print(head);
+    return 0;
+}
+-------------------------------------------------------------------------------------------------------
+#include<stdio.h>
+#include<stdlib.h>
+struct Node{
+    int data;
+    struct Node* next;
+};
+
+ struct Node* head = NULL;
+ struct Node* tail = NULL;
+ 
+ struct Node* createNode(int a){
+    struct Node* newNode=(struct Node*)malloc(sizeof (struct Node));
+    newNode->data=a;
+    newNode-> next=NULL;
+    return newNode;
+
+ }
+ 
+ void insert (int a) {
+    struct Node* newNode=createNode(a);
+    if (head == NULL){
+    head=newNode;
+    tail=newNode;
+    }
+    else{
+    tail->next=newNode;
+    tail=newNode;
+    }
+ }
+  void print(struct Node* h){
+    while(h!=NULL){
+    printf("%d", h->data);
+    h=h->next;
+    }
+}
+
+int main(){
+    while(1){
+    int a;
+    scanf("%d", &a);
+    if(a>0)
+    insert(a);
+    else
+        break;
+}
+    print(head);
+    return 0;
+}

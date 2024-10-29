@@ -1,0 +1,205 @@
+Merge two sorted linked list
+Write a program to merge two sorted linked lists. Given two sorted linked lists let's say list1 and list2, merge list2 with list1. Insertion has to be done at the end of list1.
+
+
+
+Format:
+
+Input:
+
+The first line consists of the size of the first linked list.
+
+The second line consists of a sorted linked list separated by space.
+
+The third line consists of the size of the second linked list.
+
+The fourth line consists of a sorted linked list separated by space.
+
+Output:
+
+The output should be the merged list of two linked lists.
+
+
+
+Example:
+
+Input:
+
+3
+
+1 3 5
+
+3
+
+2 4 6
+
+Output:
+
+1->2->3->4->5->6->NULL
+===============================================================================================================================
+
+import java.util.Scanner;
+
+public class Main {
+  
+	static class Node {
+
+		int data;
+		Node next;
+
+		Node(int data) {
+
+			this.data = data;
+		}
+	}
+
+		Node head, tail;
+		int size = 0;
+
+		public void addNode(int data) {
+
+			Node newNode = new Node(data);
+
+			if (head == null) {
+
+				head = tail = newNode;
+				return;
+			}
+
+			tail.next = newNode;
+			tail = newNode;
+		}
+
+  
+	public static Node mergeTwoLists(Node l1, Node l2) {
+
+		if (l1 == null)
+			return l2;
+
+		if (l2 == null)
+			return l1;
+
+		Node temp = new Node(-1);
+		Node head = temp;
+
+		while (l1 != null && l2 != null) {
+
+			if (l1.data < l2.data) {
+
+				temp.next = l1;
+				temp = temp.next;
+				l1 = l1.next;
+			}
+
+			else {
+
+				temp.next = l2;
+				temp = temp.next;
+				l2 = l2.next;
+			}
+		}
+
+      while (l1 != null) {
+
+			temp.next = l1;
+			temp = temp.next;
+			l1 = l1.next;
+		}
+      
+		while (l2 != null) {
+
+			temp.next = l2;
+			temp = temp.next;
+			l2 = l2.next;
+		}
+		return head.next;
+	}
+  
+	public static void main(String[] args) throws Exception {
+
+		Scanner sc = new Scanner(System.in);
+		Main list1 = new Main();
+		Main list2 = new Main();
+
+		int size1 = sc.nextInt();
+		for (int i = 0; i < size1; i++)
+			list1.addNode(sc.nextInt());
+
+		int size2 = sc.nextInt();
+		for (int i = 0; i < size2; i++)
+			list2.addNode(sc.nextInt());
+
+		Node ans = mergeTwoLists(list1.head, list2.head);
+
+		Node temp = ans;
+
+		while (temp != null) {
+
+			System.out.print(temp.data + "->");
+			temp = temp.next;
+		}
+		System.out.print("NULL");
+		sc.close();
+	}
+
+}
+=============================================================================LEETCODE 21 ==========================================================
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        
+        ListNode n=new ListNode(0);
+        ListNode nn=n;
+        while(true)
+        {
+            if(list1==null)
+            {
+                nn.next=list2;
+                break;
+            }
+            if(list2==null)
+            {
+                nn.next=list1;
+                break;
+            }
+            if(list1.val<list2.val)
+            {
+                nn.next=list1;
+                list1=list1.next;
+            }
+            else
+            {
+                nn.next=list2;
+                list2=list2.next;
+            }
+            nn=nn.next;        
+    }
+    return n.next;
+}
+}
+====================================without extra space=====================================================
+class Solution {
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        if (list1 == null) 
+            return list2;
+        if (list2 == null) 
+            return list1;
+        if (list1.val < list2.val) {
+            list1.next = mergeTwoLists(list1.next, list2);
+            return list1;
+        } 
+        else {
+            list2.next = mergeTwoLists(list2.next, list1);
+            return list2;
+        }
+    }
+}

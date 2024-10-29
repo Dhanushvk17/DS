@@ -1,0 +1,198 @@
+
+Python STACK USING LIST
+def isEmpty(stack):
+    return len(stack) == 0
+
+def push(stack, item):
+    stack.append(item)
+    
+def pop(stack):
+    if (isEmpty(stack)):
+        raise IndexError("Empty Stack")     
+    return stack.pop()
+
+def peek(stack):
+    if (isEmpty(stack)):
+        raise IndexError("Empty Stack") 
+    return stack[len(stack) - 1]
+
+def dis(stack):
+    if (isEmpty(stack)):
+        raise IndexError("Empty Stack") 
+stack = []
+while(True):
+    i=int(input())
+    if(i<0):
+        break
+    else:
+        push(stack,i)
+print(peek(stack))
+-----------------------------------------------------------------------
+STACK USING LL
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+class LinkedList:
+    def __init__(self):
+        self.top = None
+
+    def push(self, n):
+        new_node = Node(n)
+        if self.top is None:
+            self.top = new_node
+        else:
+            new_node.next = self.top
+            self.top = new_node
+
+    def pop(self):
+        if self.top is None:
+            raise IndexError("Empty Stack")
+        else:
+            self.top = self.top.next
+
+    def peek(self):
+        if self.top is None:
+            raise IndexError("Empty Stack")
+        else:
+            print(self.top.data)
+
+    def display(self):
+        if self.top is None:
+            raise IndexError("Empty Stack")
+        else:
+            temp = self.top
+            while temp is not None:
+                print(temp.data, "->", end=" ")
+                temp = temp.next
+            print("NULL")
+            print()
+
+
+if __name__ == '__main__':
+    l = LinkedList()
+    while True:
+        i = int(input())
+        if i < 0:
+            break
+        l.push(i)
+    l.display()
+    #l.pop()
+    #l.display()
+    #l.peek()
+    l.display()
+-------------------------------------------------------------------------------------
+import java.util.*;
+class Node {
+    int data;
+    Node next;
+    Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+class LinkedList {
+    Node top;
+
+    public void push(int n) {
+        Node newNode = new Node(n);
+        if (top == null) {
+            top = newNode;
+        } else {
+            newNode.next = top;
+            top = newNode;
+        }
+    }
+
+    public void pop() {
+        if (top == null)
+            throw new ArrayIndexOutOfBoundsException("Empty Stack");
+        else {
+            top = top.next;
+        }
+    }
+
+    public void peek() {
+        if (top == null)
+            throw new ArrayIndexOutOfBoundsException("Empty Stack");
+        else {
+            System.out.println(top.data);
+        }
+    }
+
+    public void display() {
+        if (top == null)
+            throw new ArrayIndexOutOfBoundsException("Empty Stack");
+        else {
+            Node temp = top;
+            while (temp != null) {
+                System.out.print(temp.data + "->");
+                temp = temp.next;
+            }
+            System.out.print("NULL");
+            System.out.println();
+        }
+    }
+}
+class Main {
+    public static void main(String[] args) {
+        LinkedList l = new LinkedList();
+        Scanner z=new Scanner(System.in);
+        while(true)
+        {
+            int i=z.nextInt();
+            if(i<0)
+            break;
+            l.push(i);
+            
+        }
+        
+        // l.push(1);
+        // l.push(2);
+        // l.push(3);
+        // l.push(4);
+        // l.push(5);
+        l.display();
+        l.pop();
+        l.display();
+        l.peek();
+        l.display();
+    }
+}
+===============================================================================================
+def isEmpty(stack):
+    return len(stack) == 0
+
+def push(stack, item):
+    stack.append(item)
+    
+def pop(stack):
+    if (isEmpty(stack)):
+        raise IndexError("Empty Stack")     
+    return stack.pop()
+
+def peek(stack):
+    if (isEmpty(stack)):
+        raise IndexError("Empty Stack") 
+    return stack[len(stack) - 1]
+
+def dis(stack):
+    if (isEmpty(stack)):
+        raise IndexError("Empty Stack") 
+    else:
+        print(stack)
+stack = []
+n=int(input())
+t=0
+while(True):
+    if(t>n):
+        print("stack over flow")
+        break
+    i=int(input())
+    if(i<0):
+        break
+    else:
+        push(stack,i)
+    t+=1
+print(dis(stack))
